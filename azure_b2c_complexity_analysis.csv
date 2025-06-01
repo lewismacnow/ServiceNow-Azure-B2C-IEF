@@ -1,0 +1,11 @@
+Step,Complexity,Manual_Tasks,Error_Prone,Description,Current_Automation
+Create Signing Key,Low,3,Low,Generate TokenSigningKeyContainer in Azure Portal,Manual clicks in portal
+Create Encryption Key,Low,3,Low,Generate TokenEncryptionKeyContainer in Azure Portal,Manual clicks in portal
+Register IdentityExperienceFramework App,Medium,7,Medium,"Create app registration, configure redirect URI, set permissions, expose API with scope",Manual configuration
+Register ProxyIdentityExperienceFramework App,Medium,8,Medium,"Create public client app, configure permissions, grant admin consent",Manual configuration
+Create Dummy Facebook Key,Low,4,Low,Create manual policy key with dummy value,Manual entry
+Create ServiceNow App Policy Key,Medium,5,Medium,Store application client secret as policy key,Manual entry
+Edit TrustFrameworkExtensions.xml,High,6,High,"Replace multiple placeholders including App IDs, tenant IDs, optional tenant restrictions",Manual text editing
+Update All XML Files,High,12,High,Search and replace UPDATE_ME_TENANT and UPDATE_ME across 6 XML files,Manual text editing
+Upload XML Files,Medium,6,Medium,Upload files in specific order through Azure Portal,Manual upload sequence
+Test Configuration,Medium,4,Medium,"Configure reply URL, test sign-in flow",Manual testing

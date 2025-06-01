@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure B2C IEF XML Policy Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Azure B2C IEF XML Policy Generator</h1>
+            <p class="subtitle">Automate your Identity Experience Framework setup</p>
+            <p class="description">Generate custom XML policies for Azure B2C Identity Experience Framework with automatic placeholder replacement. This tool simplifies the complex setup process by automating XML generation and configuration.</p>
+        </header>
+
+        <!-- Complexity Analysis -->
+        <section class="complexity-section">
+            <div class="card">
+                <div class="card__body">
+                    <h3>Why Use This Tool?</h3>
+                    <div class="complexity-content">
+                        <div class="complexity-text">
+                            <p>Setting up Azure B2C IEF manually involves <strong>58+ manual tasks</strong> across multiple complex steps. This tool automates <strong>70-80% of the process</strong>, reducing errors and setup time significantly.</p>
+                        </div>
+                        <div class="complexity-chart">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1748796179/pplx_code_interpreter/04f59eab_sppakn.jpg" alt="Azure B2C IEF Setup Complexity Chart" class="chart-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="progress-step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Input</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Generate</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Download</div>
+            </div>
+        </div>
+
+        <!-- Input Form Section -->
+        <section class="form-section">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Configuration Details</h2>
+                    <form id="configForm" class="config-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tenantName" class="form-label">Tenant Name *</label>
+                                <input type="text" id="tenantName" name="tenantName" class="form-control" required 
+                                       placeholder="contoso (without .onmicrosoft.com)">
+                                <div class="form-error" id="tenantNameError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="companyName" class="form-label">Company Name *</label>
+                                <input type="text" id="companyName" name="companyName" class="form-control" required 
+                                       placeholder="Contoso Corporation">
+                                <div class="form-error" id="companyNameError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="servicenowAppId" class="form-label">ServiceNow App Client ID *</label>
+                                <input type="text" id="servicenowAppId" name="servicenowAppId" class="form-control" required 
+                                       placeholder="12345678-1234-1234-1234-123456789012">
+                                <div class="form-error" id="servicenowAppIdError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="servicenowSecret" class="form-label">ServiceNow App Client Secret *</label>
+                                <input type="password" id="servicenowSecret" name="servicenowSecret" class="form-control" required 
+                                       placeholder="Your application secret">
+                                <div class="form-error" id="servicenowSecretError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="iefAppId" class="form-label">IdentityExperienceFramework App ID *</label>
+                                <input type="text" id="iefAppId" name="iefAppId" class="form-control" required 
+                                       placeholder="87654321-4321-4321-4321-210987654321">
+                                <div class="form-error" id="iefAppIdError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="proxyIefAppId" class="form-label">ProxyIdentityExperienceFramework App ID *</label>
+                                <input type="text" id="proxyIefAppId" name="proxyIefAppId" class="form-control" required 
+                                       placeholder="11223344-5566-7788-9900-112233445566">
+                                <div class="form-error" id="proxyIefAppIdError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="enableTenantRestrictions" name="enableTenantRestrictions">
+                                <span class="checkmark"></span>
+                                Enable tenant restrictions
+                            </label>
+                        </div>
+
+                        <div class="form-group tenant-restrictions" id="tenantRestrictionsGroup" style="display: none;">
+                            <label for="tenantRestrictions" class="form-label">Tenant Restrictions</label>
+                            <textarea id="tenantRestrictions" name="tenantRestrictions" class="form-control" rows="3" 
+                                      placeholder="Enter comma-separated tenant IDs&#10;e.g., tenant1-id, tenant2-id, tenant3-id"></textarea>
+                            <div class="form-help">Enter comma-separated list of allowed tenant IDs</div>
+                            <div class="form-error" id="tenantRestrictionsError"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generation Section -->
+        <section class="generation-section">
+            <div class="card">
+                <div class="card__body">
+                    <button type="button" id="generateBtn" class="btn btn--primary btn--lg btn--full-width" disabled>
+                        <span class="btn-text">Generate XML Policies</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                    <div id="generationMessage" class="message" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download-section" id="downloadSection" style="display: none;">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Generated Policy Files</h2>
+                    <p>Your XML policies have been generated successfully. Download the files below and follow the setup instructions.</p>
+                    
+                    <div class="download-grid">
+                        <div class="download-item" data-file="TrustFrameworkBase">
+                            <div class="file-info">
+                                <div class="file-name">TrustFrameworkBase.xml</div>
+                                <div class="file-description">Core foundation policy containing base claims, content definitions, and technical profiles</div>
+                            </div>
+                            <button class="btn btn--secondary download-file-btn">Download</button>
+                        </div>
+
+                        <div class="download-item" data-file="TrustFrameworkLocalization">
+                            <div class="file-info">
+                                <div class="file-name">TrustFrameworkLocalization.xml</div>
+                                <div class="file-description">Localization support for multiple languages and regional settings</div>
+                            </div>
+                            <button class="btn btn--secondary download-file-btn">Download</button>
+                        </div>
+
+                        <div class="download-item" data-file="TrustFrameworkExtensions">
+                            <div class="file-info">
+                                <div class="file-name">TrustFrameworkExtensions.xml</div>
+                                <div class="file-description">Custom extensions including OpenID Connect configuration and application-specific settings</div>
+                            </div>
+                            <button class="btn btn--secondary download-file-btn">Download</button>
+                        </div>
+
+                        <div class="download-item" data-file="SignUpOrSignin">
+                            <div class="file-info">
+                                <div class="file-name">SignUpOrSignin.xml</div>
+                                <div class="file-description">Primary relying party policy for user sign-up and sign-in flows</div>
+                            </div>
+                            <button class="btn btn--secondary download-file-btn">Download</button>
+                        </div>
+
+                        <div class="download-item" data-file="ProfileEdit">
+                            <div class="file-info">
+                                <div class="file-name">ProfileEdit.xml</div>
+                                <div class="file-description">Policy for user profile editing and updates</div>
+                            </div>
+                            <button class="btn btn--secondary download-file-btn">Download</button>
+                        </div>
+
+                        <div class="download-item" data-file="PasswordReset">
+                            <div class="file-info">
+                                <div class="file-name">PasswordReset.xml</div>
+                                <div class="file-description">Self-service password reset policy for user account recovery</div>
+                            </div>
+                            <button class="btn btn--secondary download-file-btn">Download</button>
+                        </div>
+                    </div>
+
+                    <div class="download-all">
+                        <button id="downloadAllBtn" class="btn btn--primary btn--lg">Download All as ZIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup Instructions -->
+        <section class="instructions-section" id="instructionsSection" style="display: none;">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Next Steps</h2>
+                    <p>Follow these steps to complete your Azure B2C IEF setup:</p>
+                    
+                    <ol class="setup-steps">
+                        <li>Create signing and encryption keys in Azure Portal</li>
+                        <li>Register IdentityExperienceFramework and ProxyIdentityExperienceFramework applications</li>
+                        <li>Create policy keys for application secrets</li>
+                        <li>Upload XML policies in the correct order</li>
+                        <li>Test the configuration with a sample application</li>
+                    </ol>
+
+                    <div class="documentation-links">
+                        <a href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/custom-policy-get-started" target="_blank" class="btn btn--outline">
+                            View Full Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Help Section -->
+        <section class="help-section">
+            <div class="card">
+                <div class="card__body">
+                    <details class="help-details">
+                        <summary class="help-summary">
+                            <h3>Need Help?</h3>
+                        </summary>
+                        <div class="help-content">
+                            <div class="help-grid">
+                                <div class="help-item">
+                                    <h4>Common Issues</h4>
+                                    <ul>
+                                        <li>Ensure all App IDs are in correct GUID format</li>
+                                        <li>Verify tenant name doesn't include .onmicrosoft.com</li>
+                                        <li>Check that application secrets are valid</li>
+                                    </ul>
+                                </div>
+                                <div class="help-item">
+                                    <h4>Required Permissions</h4>
+                                    <ul>
+                                        <li>Global Administrator or B2C IEF Policy Administrator</li>
+                                        <li>Application registration permissions</li>
+                                        <li>Policy upload permissions in B2C tenant</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
