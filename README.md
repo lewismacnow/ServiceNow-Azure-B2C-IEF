@@ -1,10 +1,14 @@
 # Azure B2C Identity Experience Framework (IEF) Setup Guide
 
-## Complete Guide for OpenID Connect with Automated XML Generation
+## Guide for OpenID Connect with Automated XML Generation
 
 ### Overview
 
-This comprehensive guide simplifies the Azure Active Directory B2C Identity Experience Framework setup process. Instead of the traditional 58+ manual tasks, this guide provides an automated approach that reduces manual work by 70-80% while ensuring accuracy and consistency.
+This guide aims to simplify the Azure Active Directory B2C Identity Experience Framework setup process by providing an [automated approach](https://lewismac.com/b2ctool/) that reduces manual work.
+
+An Azure Active Directory Identity Experience Framework can be used to enable automatic "sign up and sign in" for ServiceNow, when deployed in a B2C tenant it can be used to automatically allow multiple tenants including external customer tenants to authenticate with your ServiceNow instance, reducing user admin burdon.
+
+The XML generated here automtically claims a users First and Last name, username and e-mail address, which you can then apply it to an OpenID Multi-Provider SSO identity profile and pass the details into an automatic provision data source & transform map.
 
 ## Table of Contents
 
@@ -188,7 +192,9 @@ IdentityExperienceFrameworkAppId → {ief-app-id}
 
 ### Step 4.3: Use the Automated XML Generator
 
-You can view an example companion web application here: [lewismac.om/b2ctool](https://lewismac.com/b2ctool/)
+You can view an example companion web application here: 
+[lewismac.om/b2ctool](https://lewismac.com/b2ctool/)
+
 Simply download the repo and run the application locally in your browser.
 
 The companion web application will:
