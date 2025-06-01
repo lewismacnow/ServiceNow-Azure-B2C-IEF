@@ -4,11 +4,11 @@
 
 ### Overview
 
-This guide aims to simplify the Azure Active Directory B2C Identity Experience Framework setup process by providing an [automated approach](https://lewismac.com/b2ctool/) that reduces manual work.
+This guide aims to simplify a Azure Active Directory B2C Identity Experience Framework setup process by providing an [automated approach](https://lewismac.com/b2ctool/) that generates the required XML.
 
 An Azure Active Directory Identity Experience Framework can be used to enable automatic "sign up and sign in" for ServiceNow, when deployed in a B2C tenant it can be used to automatically allow multiple tenants including external customer tenants to authenticate with your ServiceNow instance, reducing user admin burdon.
 
-The XML generated here automtically claims a users First and Last name, username and e-mail address, which you can then apply it to an OpenID Multi-Provider SSO identity profile and pass the details into an automatic provision data source & transform map.
+The XML generated here automtically claims a users First and Last Name, User ID and E-Mail Address, which you can then apply to an OpenID Connect Multi-Provider SSO Identity Provider and pass the details into an automatic provision data source & transform map.
 
 ## Table of Contents
 
