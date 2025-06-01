@@ -188,6 +188,9 @@ IdentityExperienceFrameworkAppId → {ief-app-id}
 
 ### Step 4.3: Use the Automated XML Generator
 
+You can view an example companion web application here: [lewismac.om/b2ctool](https://lewismac.com/b2ctool/)
+Simply download the repo and run the application locally in your browser.
+
 The companion web application will:
 1. Load the base XML templates
 2. Replace all placeholders with your values
@@ -199,7 +202,7 @@ The companion web application will:
 
 ### Step 5.1: Upload Policies in Correct Order
 
-Upload in this **exact sequence**:
+Upload in this sequence:
 1. `TrustFrameworkBase.xml`
 2. `TrustFrameworkLocalization.xml`
 3. `TrustFrameworkExtensions.xml`
